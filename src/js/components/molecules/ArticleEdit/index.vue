@@ -4,10 +4,10 @@
       <app-text bg-success>{{ doneMessage }}</app-text>
     </div>
     <div class="article-edit__columns">
-      <section class="article-edit-editor">
+      <section class="article-edit__editor">
         <app-heading :level="1">記事の更新</app-heading>
         <app-heading
-          class="article-edit-editor-title"
+          class="article-edit__editor__title"
           :level="2"
         >
           カテゴリーの選択
@@ -29,12 +29,12 @@
           </option>
         </app-select>
         <app-heading
-          class="article-edit-editor-title"
+          class="article-edit__editor__title"
           :level="2"
         >
           タイトル・本文の更新
         </app-heading>
-        <div class="article-edit-form">
+        <div class="article-edit__form">
           <app-input
             v-validate="'required'"
             name="title"
@@ -48,7 +48,7 @@
           />
         </div>
 
-        <div class="article-edit-form">
+        <div class="article-edit__form">
           <app-textarea
             v-validate="'required'"
             name="content"
@@ -61,7 +61,7 @@
           />
         </div>
         <app-button
-          class="article-edit-submit"
+          class="article-edit__submit"
           button-type="submit"
           round
           :disabled="!disabled"
@@ -71,7 +71,7 @@
         </app-button>
       </section>
 
-      <article class="article-edit-preview">
+      <article class="article-edit__preview">
         <app-markdown-preview
           :markdown-content="markdownContent"
         />
@@ -159,24 +159,24 @@ export default {
     display: flex;
     height: 100%;
   }
-  &-editor {
+  &__editor {
     padding-right: 2%;
     width: 50%;
     border-right: 1px solid #ccc;
-    &-title {
+    &__title {
       margin-top: 16px;
     }
   }
-  &-preview {
+  &__preview {
     margin-left: 2%;
     width: 48%;
     overflow-y: scroll;
     background-color: #fff;
   }
-  &-form {
+  &__form {
     margin-top: 20px;
   }
-  &-submit {
+  &__submit {
     margin-top: 16px;
   }
   &__notice--update {

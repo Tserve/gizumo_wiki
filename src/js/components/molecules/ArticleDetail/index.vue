@@ -2,7 +2,7 @@
   <div>
     <section class="article-detail">
       <app-heading :level="1">記事詳細（プレビュー）</app-heading>
-      <div class="article-detail-links">
+      <div class="article-detail__links">
         <app-router-link
           :to="`/articles/${articleId}/edit`"
           white
@@ -118,9 +118,9 @@ export default {
     height: 300px;
     background-color: #fff;
   }
-}
-.article-detail-links {
-  display: flex;
-  margin: 16px 0 0;
+  &__links {
+    display: flex;
+    margin: 16px 0 0;
+  }
 }
 </style>
