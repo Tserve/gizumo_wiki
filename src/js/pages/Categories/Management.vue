@@ -4,7 +4,9 @@
       <app-category-post />
     </section>
     <section class="category-management-list">
-      <app-category-list />
+      <app-category-list
+        :categories="[{ id: 1, name: 'ダミーカテゴリー' }]"
+      />
     </section>
   </div>
 </template>
@@ -14,6 +16,12 @@ import { CategoryPost, CategoryList } from '@Components/molecules';
 import Mixins from '@Helpers/mixins';
 
 export default {
+  data() {
+    return {
+      category: '',
+      theads: ['カテゴリー名', '', '', ''],
+    };
+  },
   components: {
     appCategoryPost: CategoryPost,
     appCategoryList: CategoryList,
