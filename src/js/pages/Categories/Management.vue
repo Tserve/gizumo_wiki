@@ -1,11 +1,16 @@
 <template lang="html">
   <div class="category-management">
     <section class="category-management-post">
-      <app-category-post />
+      <app-category-post
+        :access="access"
+      />
     </section>
     <section class="category-management-list">
       <app-category-list
+        :access="access"
+        :theads="theads"
         :categories="[{ id: 1, name: 'ダミーカテゴリー' }]"
+        @openModal="openModal"
       />
     </section>
   </div>
@@ -23,9 +28,18 @@ export default {
   mixins: [Mixins],
   data() {
     return {
-      category: '',
       theads: ['カテゴリー名', '', '', ''],
     };
+  },
+  computed: {
+    access() {
+      return this.$store.getters['auth/access'];
+    },
+  },
+  methods: {
+    openModal() {
+      this.toggleModal();
+    },
   },
 };
 </script>

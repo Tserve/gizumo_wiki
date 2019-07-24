@@ -8,24 +8,21 @@
       placeholder="追加するカテゴリー名を入力してください"
       data-vv-as="カテゴリー名"
       :error-messages="errors.collect('category')"
-      :value="category"
-      @updateValue="$emit('udpateValue', $event)"
     />
     <app-button
       class="category-management-post__submit"
       button-type="submit"
       round
-      :disabled="disabled || !access.create"
     >
       {{ buttonText }}
     </app-button>
 
-    <div v-if="errorMessage" class="category-management-post__notice">
-      <app-text bg-error>{{ errorMessage }}</app-text>
+    <div class="category-management-post__notice">
+      <app-text bg-error>ここにエラー時のメッセージが入ります</app-text>
     </div>
 
-    <div v-if="doneMessage" class="category-management-post__notice">
-      <app-text bg-success>{{ doneMessage }}</app-text>
+    <div class="category-management-post__notice">
+      <app-text bg-success>ここに作成成功時のメッセージが入ります</app-text>
     </div>
   </form>
 </template>
@@ -42,22 +39,6 @@ export default {
     appText: Text,
   },
   props: {
-    category: {
-      type: String,
-      default: '',
-    },
-    errorMessage: {
-      type: String,
-      default: '',
-    },
-    doneMessage: {
-      type: String,
-      default: '',
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
     access: {
       type: Object,
       default: () => ({}),
@@ -66,13 +47,12 @@ export default {
   computed: {
     buttonText() {
       if (!this.access.create) return '作成権限がありません';
-      return this.disabled ? '作成中...' : '作成';
+      return '作成';
     },
   },
   methods: {
     addCategory() {
       if (!this.access.create) return;
-      this.$emit('clearMessage');
       this.$validator.validate().then((valid) => {
         if (valid) this.$emit('handleSubmit');
       });
