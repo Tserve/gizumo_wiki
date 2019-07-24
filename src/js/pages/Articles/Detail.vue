@@ -1,9 +1,8 @@
 <template lang="html">
   <app-article-detail
-    :article-id="articleId"
+    :access="access"
     :markdown-indexes="markdownIndexes"
     :markdown-content="markdownContent"
-    :access="access"
     @parsedMarkdown="initIndex"
     @openModal="openModal"
     @handleClick="handleClick"
@@ -25,20 +24,12 @@ export default {
     };
   },
   computed: {
-    articleId() {
-      const id = parseInt(this.$route.params.id, 10);
-      return id;
-    },
-    markdownContent() {
-      const { title, content } = this.$store.state.articles.targetArticle;
-      return `# ${title}\n${content}`;
-    },
     access() {
       return this.$store.getters['auth/access'];
     },
-  },
-  created() {
-    this.$store.dispatch('articles/getArticleDetail', parseInt(this.articleId, 10));
+    markdownContent() {
+      return '# ダミータイトル\nダミー本文ダミー本文ダミー本文ダミー本文ダミー本文ダミー本文';
+    },
   },
   methods: {
     initIndex() {
@@ -89,17 +80,11 @@ export default {
         this.$SmoothScroll(target.scrollToY);
       }
     },
-    openModal(articleId) {
-      this.$store.dispatch('articles/confirmDeleteArticle', articleId);
+    openModal() {
       this.toggleModal();
     },
     handleClick() {
-      this.$store.dispatch('articles/deleteArticle');
       this.toggleModal();
-      this.$router.push({
-        path: '/articles',
-        query: { redirect: this.$route.fullPath },
-      });
     },
   },
 };

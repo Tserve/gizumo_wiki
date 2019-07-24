@@ -43,7 +43,6 @@
       </app-text>
       <app-button
         bg-danger
-        @click="$emit('handleClick')"
       >
         削除
       </app-button>

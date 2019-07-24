@@ -2,12 +2,33 @@
   <div class="articles">
     <app-article-list
       :title="title"
-      :target-array="articlesList"
-      :done-message="doneMessage"
+      :target-array="[{
+        'id': 82,
+        'user': {
+          'id': 4,
+          'account_name': 'komatti',
+          'full_name': '小松 信之',
+          'email': 'komatti@test.com',
+          'role': {
+            'id': 1,
+            'name': 'システム管理者',
+            'value': 'system'
+          },
+          'password_reset_flg': 1,
+          'created_at': '2019-07-01T09:54:36.000000Z',
+          'updated_at': '2019-07-09T11:44:45.000000Z'
+        },
+        'title': 'タイトルのテスト3',
+        'content': 'テスト本文テスト本文テスト本文テスト本文テスト本文テスト本文テスト本文テスト本文テスト本文テスト本文テスト本文テスト本文テスト本文',
+        'category': {
+          'id': 1,
+          'name': '全体'
+        },
+        'created_at': '2019-07-16T09:32:46.000000Z',
+        'updated_at': '2019-07-16T09:32:46.000000Z'
+      }]"
       :access="access"
-      border-gray
       @openModal="openModal"
-      @handleClick="handleClick"
     />
   </div>
 </template>
@@ -34,54 +55,13 @@ export default {
     articlesList() {
       return this.$store.state.articles.articleList;
     },
-    doneMessage() {
-      return this.$store.state.articles.doneMessage;
-    },
     access() {
       return this.$store.getters['auth/access'];
     },
   },
-  created() {
-    this.fetchArticles();
-  },
   methods: {
-    openModal(articleId) {
-      this.$store.dispatch('articles/confirmDeleteArticle', articleId);
+    openModal() {
       this.toggleModal();
-    },
-    handleClick() {
-      this.$store.dispatch('articles/deleteArticle');
-      this.toggleModal();
-      if (this.$route.query.category) {
-        const { category } = this.$route.query;
-        this.title = category;
-        this.$store.dispatch('articles/filteredArticles', category)
-          .then(() => {
-            if (this.$store.state.articles.articleList.length === 0) {
-              this.$router.push({ path: '/notfound' });
-            }
-          }).catch(() => {
-            // console.log(err);
-          });
-      } else {
-        this.$store.dispatch('articles/getAllArticles');
-      }
-    },
-    fetchArticles() {
-      if (this.$route.query.category) {
-        const { category } = this.$route.query;
-        this.title = category;
-        this.$store.dispatch('articles/filteredArticles', category)
-          .then(() => {
-            if (this.$store.state.articles.articleList.length === 0) {
-              this.$router.push({ path: '/notfound' });
-            }
-          }).catch(() => {
-            // console.log(err);
-          });
-      } else {
-        this.$store.dispatch('articles/getAllArticles');
-      }
     },
   },
 };

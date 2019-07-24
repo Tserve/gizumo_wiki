@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="article-list">
-    <div v-if="doneMessage" class="article-list__notice--create">
-      <app-text bg-success>{{ doneMessage }}</app-text>
+    <div class="article-list__notice--create">
+      <app-text bg-success>ドキュメント作成・削除成功時のメッセージがここに入ります</app-text>
     </div>
     <app-heading :level="1">{{ articleTitle }}</app-heading>
     <app-router-link
@@ -102,25 +102,13 @@ export default {
     appText: Text,
   },
   props: {
-    className: {
-      type: String,
-      default: '',
-    },
     targetArray: {
       type: Array,
       default: () => [],
     },
-    borderGray: {
-      type: Boolean,
-      default: false,
-    },
     title: {
       type: String,
       default: 'すべて',
-    },
-    doneMessage: {
-      type: String,
-      default: '',
     },
     access: {
       type: Object,

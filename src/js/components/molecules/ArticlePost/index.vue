@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="article-post">
-    <div v-if="errorMessage" class="article-post__notice">
-      <app-text bg-error>{{ errorMessage }}</app-text>
+    <div class="article-post__notice">
+      <app-text bg-error>エラー時のメッセージがここに入ります</app-text>
     </div>
     <div class="article-post__columns">
       <section class="article-post-editor">
@@ -17,8 +17,6 @@
           name="category"
           data-vv-as="カテゴリー"
           :error-messages="errors.collect('category')"
-          :value="value"
-          @updateValue="$emit('selectedArticleCategory', $event)"
         >
           <option value=""> --- </option>
           <option
@@ -46,7 +44,6 @@
             data-vv-as="記事のタイトル"
             :error-messages="errors.collect('title')"
             :value="articleTitle"
-            @updateValue="$emit('editedTitle', $event)"
           />
         </div>
 
@@ -60,7 +57,6 @@
             data-vv-as="記事の本文"
             :error-messages="errors.collect('content')"
             :value="articleContent"
-            @updateValue="$emit('editedContent', $event)"
           />
         </div>
         <app-button
@@ -115,18 +111,6 @@ export default {
       type: Array,
       default: () => [],
     },
-    value: {
-      type: String,
-      default: '',
-    },
-    loading: {
-      type: Boolean,
-      default: false,
-    },
-    errorMessage: {
-      type: String,
-      default: '',
-    },
     access: {
       type: Object,
       default: () => ({}),
@@ -135,10 +119,10 @@ export default {
   computed: {
     buttonText() {
       if (!this.access.create) return '作成権限がありません';
-      return this.loading ? '作成中...' : '作成';
+      return '作成';
     },
     disabled() {
-      return this.access.create && !this.loading;
+      return this.access.create;
     },
   },
   methods: {

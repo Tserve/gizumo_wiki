@@ -16,17 +16,17 @@ import { CategoryPost, CategoryList } from '@Components/molecules';
 import Mixins from '@Helpers/mixins';
 
 export default {
+  components: {
+    appCategoryPost: CategoryPost,
+    appCategoryList: CategoryList,
+  },
+  mixins: [Mixins],
   data() {
     return {
       category: '',
       theads: ['カテゴリー名', '', '', ''],
     };
   },
-  components: {
-    appCategoryPost: CategoryPost,
-    appCategoryList: CategoryList,
-  },
-  mixins: [Mixins],
 };
 </script>
 

@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="article-edit">
-    <div v-if="doneMessage" class="article-edit__notice--update">
-      <app-text bg-success>{{ doneMessage }}</app-text>
+    <div class="article-edit__notice--update">
+      <app-text bg-success>記事更新成功時のメッセージがここに入ります</app-text>
     </div>
     <div class="article-edit__columns">
       <section class="article-edit-editor">
@@ -17,8 +17,6 @@
           name="category"
           data-vv-as="カテゴリー"
           :error-messages="errors.collect('category')"
-          :value="currentCategoryName"
-          @updateValue="$emit('selectedArticleCategory', $event)"
         >
           <option
             v-for="(category) in categoryList"
@@ -43,8 +41,6 @@
             white-bg
             data-vv-as="記事のタイトル"
             :error-messages="errors.collect('title')"
-            :value="articleTitle"
-            @updateValue="$emit('editedTitle', $event)"
           />
         </div>
 
@@ -56,8 +52,6 @@
             white-bg
             data-vv-as="記事の本文"
             :error-messages="errors.collect('content')"
-            :value="articleContent"
-            @updateValue="$emit('editedContent', $event)"
           />
         </div>
         <app-button
@@ -96,10 +90,6 @@ export default {
     appText: Text,
   },
   props: {
-    articleId: {
-      type: Number,
-      default: 0,
-    },
     articleTitle: {
       type: String,
       default: '',
@@ -120,14 +110,6 @@ export default {
       type: Array,
       default: () => [],
     },
-    loading: {
-      type: Boolean,
-      default: false,
-    },
-    doneMessage: {
-      type: String,
-      default: '',
-    },
     access: {
       type: Object,
       default: () => ({}),
@@ -139,7 +121,7 @@ export default {
       return this.loading ? '更新中...' : '更新';
     },
     disabled() {
-      return this.access.edit && !this.loading;
+      return this.access.edit;
     },
   },
   methods: {
