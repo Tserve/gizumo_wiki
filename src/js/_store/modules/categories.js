@@ -121,7 +121,7 @@ export default {
       state.doneMessage = '';
     },
     doneGetAllCategories(state, { categories }) {
-      state.categoryList = categories;
+      state.categoryList = [...categories];
     },
     failFetchCategory(state, { message }) {
       state.errorMessage = message;

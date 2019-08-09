@@ -21,7 +21,7 @@
         :value="currentCategoryName"
         @updateValue="$emit('selectedArticleCategory', $event)"
       >
-        <option value="" disabled> --- </option>
+        <option value="" disabled selected> --- </option>
         <option
           v-for="category in categoryList"
           :key="category.id"
