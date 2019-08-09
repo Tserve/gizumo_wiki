@@ -125,7 +125,7 @@ export default {
   computed: {
     buttonText() {
       if (!this.access.edit) return '更新権限がありません';
-      return this.loading ? '更新中...' : '更新';
+      return this.loading ? '作成中...' : '作成';
     },
     disabled() {
       return this.access.edit && !this.loading;

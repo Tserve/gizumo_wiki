@@ -91,19 +91,26 @@ const config = {
             options: {
               sourceMap: true,
               plugins: () => [
+                // インポートを使えるようにするやつ
                 require('postcss-import')(),
+                // mixinを使えるようにするやつ
                 require('postcss-mixins')({
                   mixinsFiles: 'src/css/_helpers/_mixins.css'
                 }),
+                // メディアクエリーのパラメーターに名前を付けられるようにするできるやつ
                 require('postcss-custom-media')({
                   importFrom: 'src/css/_helpers/_media.css'
                 }),
+                // 変数が使えるようになるやつ
                 require('postcss-custom-properties')({
                   preserve: false,
                   importFrom: 'src/css/_helpers/_variables.css'
                 }),
+                // 色味を変えれるパッケージ
                 require('postcss-color-function')(),
+                // and記法ができる
                 require('postcss-nested')(),
+                // prefixをつけるやつ
                 require('autoprefixer')(),
               ],
             },
