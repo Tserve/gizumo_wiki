@@ -18,7 +18,7 @@ import ArticleList from '@Pages/Articles/List';
 import ArticleDetail from '@Pages/Articles/Detail';
 import ArticleEdit from '@Pages/Articles/Edit';
 import ArticlePost from '@Pages/Articles/Post';
-import ArticleDeleted from '@Pages/deleted/Deleted';
+import ArticleTrashed from '@Pages/Trashed/trashed';
 
 // 自分のアカウントページ
 import Profile from '@Pages/Profile';
@@ -112,9 +112,9 @@ const router = new VueRouter({
           component: ArticleEdit,
         },
         {
-          name: 'articleDeleted',
+          name: 'articleTrashed',
           path: '/trashed',
-          component: ArticleDeleted,
+          component: ArticleTrashed,
         },
       ],
     },

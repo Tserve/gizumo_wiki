@@ -28,6 +28,7 @@ export default {
     loading: false,
     doneMessage: '',
     errorMessage: '',
+    trashedList: [],
   },
   getters: {
     transformedArticles(state) {
@@ -71,6 +72,9 @@ export default {
     doneGetArticle(state, payload) {
       state.targetArticle = Object.assign({}, state.targetArticle, payload.article);
     },
+    doneGetTrashedList(state, payload) {
+      state.trashedList = [...payload.articles];
+    },
     editedTitle(state, payload) {
       state.targetArticle = Object.assign({}, { ...state.targetArticle }, {
         title: payload.title,
@@ -90,7 +94,7 @@ export default {
           name: payload.category.name,
         },
       });
-      console.log(state.targetArticle);
+      // console.log(state.targetArticle);
     },
     doneFilteredArticles(state, payload) {
       const filteredArticles = payload.articles.filter(
@@ -144,6 +148,19 @@ export default {
           articles: res.data.articles,
         };
         commit('doneGetAllArticles', payload);
+      }).catch((err) => {
+        commit('failRequest', { message: err.message });
+      });
+    },
+    getTrashedList({ commit, rootGetters }) {
+      axios(rootGetters['auth/token'])({
+        method: 'GET',
+        url: '/article/trashed',
+      }).then((res) => {
+        const payload = {
+          articles: res.data.articles,
+        };
+        commit('doneGetTrashedList', payload);
       }).catch((err) => {
         commit('failRequest', { message: err.message });
       });
@@ -209,7 +226,7 @@ export default {
           commit('doneFilteredArticles', payload);
           resolve();
         }).catch((err) => {
-          console.log(err);
+          // console.log(err);
           commit('failRequest', { message: err.message });
           reject(new Error('エラーが発生しました'));
         });
