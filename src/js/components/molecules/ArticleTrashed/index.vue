@@ -6,16 +6,25 @@
     <app-list-item
       v-for="article in targetArray"
       :key="article.id"
-      flex
-      beetween
-      align-items
+      list-style-none
       bg-white
       large
       border-bottom-gray
     >
-      <app-text>
-        {{ article.title }}
-      </app-text>
+      <app-accordion
+      class="accordion"
+        :title="article.title"
+      >
+        <li>
+          作成日: {{ article.created_at }}
+        </li>
+        <li>
+          作者: {{ article.user.full_name }}
+        </li>
+        <li>
+          本文: {{ article.content }}
+        </li>
+      </app-accordion>
     </app-list-item>
   </div>
 </template>
@@ -25,6 +34,8 @@ import {
   Heading,
   ListItem,
   Text,
+  Accordion,
+  Button,
 } from '@Components/atoms';
 
 export default {
@@ -32,6 +43,8 @@ export default {
     appHeading: Heading,
     appListItem: ListItem,
     appText: Text,
+    appAccordion: Accordion,
+    appButton: Button,
   },
   props: {
     targetArray: {
@@ -41,7 +54,3 @@ export default {
   },
 };
 </script>
-
-<style lang="postcss" scoped>
-
-</style>
