@@ -1,18 +1,18 @@
 <template lang="html">
-  <div>
-    <p
-      style="cursor: pointer"
+  <details>
+    <summary
+      class="accordionHeading"
       @click="toggleShow"
     >
       {{ title }}
-    </p>
+    </summary>
     <div
-      :class="classes"
       v-if="isShow"
+      :class="classes"
     >
       <slot />
     </div>
-  </div>
+  </details>
 </template>
 
 <script>
@@ -25,12 +25,12 @@ export default {
     title: {
       type: String,
       default: '',
-    }
+    },
   },
   data() {
     return {
       isShow: false,
-    }
+    };
   },
   computed: {
     classes() {
@@ -42,7 +42,13 @@ export default {
   methods: {
     toggleShow() {
       this.isShow = !this.isShow;
-    }
-  }
+    },
+  },
 };
 </script>
+
+<style lang="postcss" scoped>
+  .accordionHeading{
+    cursor: pointer;
+  }
+</style>
