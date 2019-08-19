@@ -8,7 +8,6 @@
       :key="article.id"
       list-style-none
       bg-white
-      large
       border-bottom-gray
     >
       <app-accordion
